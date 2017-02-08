@@ -14,7 +14,7 @@ namespace Sherwin_Motor_Parts
     {
      
         OleDbConnection connection = new OleDbConnection();
-        OleDbCommand command = new OleDbCommand();
+        OleDbCommand command = null;
         OleDbDataReader rdr = null;
         
         String cs = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\Smp.accdb;";
@@ -32,17 +32,29 @@ namespace Sherwin_Motor_Parts
 
         private void disp_data()
         {
+            dataGridView1.AllowUserToAddRows = false;
             connection = new OleDbConnection(cs);
             connection.Open();
-            command.Connection = connection;
-            command.CommandType = CommandType.Text;
-            command.CommandText = "select User_ID,Firstname,Lastname,Username,ContactNo from Accounts";
-            command.ExecuteNonQuery();
-            DataTable dt = new DataTable();
-            OleDbDataAdapter da = new OleDbDataAdapter(command);
-            da.Fill(dt);
-            dataGridView1.DataSource = dt;
+            String sql = "SELECT User_ID,Firstname,Lastname,Username,User_Password,ContactNo from Accounts";
+            command = new OleDbCommand(sql, connection);
+            rdr = command.ExecuteReader(CommandBehavior.CloseConnection);
+            dataGridView1.Rows.Clear();
+            while (rdr.Read() == true)
+            {
+                dataGridView1.Rows.Add(rdr[0], rdr[1], rdr[2], rdr[3], rdr[4], rdr[5]);
+            }
             connection.Close();
+//            connection = new OleDbConnection(cs);
+//            connection.Open();
+//            command.Connection = connection;
+//            command.CommandType = CommandType.Text;
+//            command.CommandText = "select User_ID,Firstname,Lastname,Username,ContactNo from Accounts";
+//            command.ExecuteNonQuery();
+//            DataTable dt = new DataTable();
+//            OleDbDataAdapter da = new OleDbDataAdapter(command);
+//            da.Fill(dt);
+//            dataGridView1.DataSource = dt;
+//            connection.Close();
       
         }
 
@@ -56,7 +68,7 @@ namespace Sherwin_Motor_Parts
         {
             if (txtUserID.Text == "")
             {
-                MessageBox.Show("Please enter the User ID number you want to edit");
+                MessageBox.Show("Please select a row from the table");
                 txtUserID.Focus();
                 return;
             }
@@ -105,46 +117,64 @@ namespace Sherwin_Motor_Parts
                 txtcontactno.Focus();
                 return;
             }
-            
+
             connection = new OleDbConnection(cs);
-           
-                connection.Open();
-                string ct = "select Username from Accounts where Username=@find";
-                command = new OleDbCommand(ct);
-                command.Connection = connection;
-                command.Parameters.Add(new OleDbParameter("@find", System.Data.OleDb.OleDbType.VarChar, 30, "Username"));
-                command.Parameters["@find"].Value = txtusername.Text;
-                rdr = command.ExecuteReader();                
+            connection.Open();
+            string cts = "select User_ID from Accounts where User_ID=@uid";
+            command = new OleDbCommand(cts);
+            command.Connection = connection;
+            command.Parameters.Add(new OleDbParameter("@uid", System.Data.OleDb.OleDbType.VarChar, 30, "User_ID"));
+            command.Parameters["@uid"].Value = txtUserID.Text;
+            rdr = command.ExecuteReader();
 
-                if (rdr.Read())
+            if (rdr.Read() == false)
+            {
+                MessageBox.Show("User ID number does not exist", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtUserID.Text = "";
+                txtUserID.Focus();
+
+                if ((rdr != null))
                 {
-                    MessageBox.Show("Username Already Exists", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txtusername.Text = "";
-                    txtusername.Focus();
-
-                    if ((rdr != null))
-                    {
-                        rdr.Close();
-                    }
-                    return;
+                    rdr.Close();
                 }
+                return;
+            }
+            
+//            connection = new OleDbConnection(cs);
+           
+//                connection.Open();
+//                string ct = "select Username from Accounts where Username=@find";
+//                command = new OleDbCommand(ct);
+//                command.Connection = connection;
+//                command.Parameters.Add(new OleDbParameter("@find", System.Data.OleDb.OleDbType.VarChar, 30, "Username"));
+//                command.Parameters["@find"].Value = txtusername.Text;
+//                rdr = command.ExecuteReader();                
+
+//                if (rdr.Read())
+//                {
+//                    MessageBox.Show("Username Already Exists", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+//                    txtusername.Text = "";
+//                    txtusername.Focus();
+
+//                    if ((rdr != null))
+//                    {
+//                        rdr.Close();
+//                    }
+//                    return;
+//                }
                 connection.Close();
+
+                if (MessageBox.Show("Are you sure you want to save the changes you've made?", "Update/Edit User Account Info", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    MessageBox.Show("Account editting/updating successful", "Update/Edit User Account", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                } 
 
                 connection.Open();
                 string query = "update Accounts set Firstname = '" + txtfname.Text + "',Lastname = '" + txtlname.Text + "',Username = '" + txtusername.Text + "',User_Password ='" + txtpassword.Text + "',ContactNo = '" + txtcontactno.Text + "' where User_ID =" + txtUserID.Text + "";
                 command = new OleDbCommand(query);
                 command.Connection = connection;
                 command.ExecuteNonQuery();
-                connection.Close();
-                connection.Open();
-                string ct1 = "select User_ID,Firstname,Lastname,Username,ContactNo from Accounts";
-                command = new OleDbCommand(ct1);           
-                
-                command.Connection = connection;
-                command.ExecuteNonQuery();
-
-                disp_data();
-                MessageBox.Show("Account edit successful");
+                disp_data();               
                 connection.Close();
 
                 txtUserID.Clear();
@@ -154,8 +184,7 @@ namespace Sherwin_Motor_Parts
                 txtpassword.Clear();
                 txtretypepassword.Clear();
                 txtcontactno.Clear();
-                txtUserID.Focus();
-     
+                txtUserID.Focus();     
         }
 
         private void txtUserID_KeyPress(object sender, KeyPressEventArgs e)
@@ -220,6 +249,18 @@ namespace Sherwin_Motor_Parts
             txtretypepassword.Clear();
             txtcontactno.Clear();
             txtUserID.Focus();
+        }
+
+        private void dataGridView1_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridViewRow drow = dataGridView1.SelectedRows[0];
+
+            txtUserID.Text = drow.Cells[0].Value.ToString();
+            txtfname.Text = drow.Cells[1].Value.ToString();
+            txtlname.Text = drow.Cells[2].Value.ToString();
+            txtusername.Text = drow.Cells[3].Value.ToString(); 
+            txtpassword.Text = drow.Cells[4].Value.ToString();       
+            txtcontactno.Text = drow.Cells[5].Value.ToString();
         }       
     }
 }

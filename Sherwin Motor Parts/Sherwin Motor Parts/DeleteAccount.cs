@@ -14,11 +14,14 @@ namespace Sherwin_Motor_Parts
     {
         OleDbConnection con = new OleDbConnection();
         OleDbCommand com = new OleDbCommand();
+        OleDbDataReader rdr = null;
+
+        String cs = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\Smp.accdb;";
 
         public DeleteAccount()
         {
             InitializeComponent();
-            con.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\Smp.accdb;";
+//            con.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\Smp.accdb;";
         }
 
         private void DeleteAccount_Load(object sender, EventArgs e)
@@ -27,6 +30,7 @@ namespace Sherwin_Motor_Parts
         }
         private void disp_data()
         {
+            con = new OleDbConnection(cs);
             con.Open();            
             com.Connection = con;
             com.CommandType = CommandType.Text;
@@ -68,6 +72,30 @@ namespace Sherwin_Motor_Parts
                 txtUserID.Focus();
                 return;
             }
+
+            con = new OleDbConnection(cs);
+
+            con.Open();
+            string cts = "select User_ID from Accounts where User_ID=@uid";
+            com = new OleDbCommand(cts);
+            com.Connection = con;
+            com.Parameters.Add(new OleDbParameter("@uid", System.Data.OleDb.OleDbType.VarChar, 30, "User_ID"));
+            com.Parameters["@uid"].Value = txtUserID.Text;
+            rdr = com.ExecuteReader();
+
+            if (rdr.Read() == false)
+            {
+                MessageBox.Show("User ID number does not exist", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtUserID.Text = "";
+                txtUserID.Focus();
+
+                if ((rdr != null))
+                {
+                    rdr.Close();
+                }
+                return;
+            }
+
             if (MessageBox.Show("Are you sure you want to delete this account?", "Message", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     con.Open();
@@ -78,7 +106,7 @@ namespace Sherwin_Motor_Parts
                     con.Close();
                     disp_data();
                     MessageBox.Show("Account was successfully deteled!");
-                }           
+                }            
         }
     }
 }

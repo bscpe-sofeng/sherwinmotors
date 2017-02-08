@@ -23,13 +23,13 @@ namespace Sherwin_Motor_Parts
         {
             if (txtuname.Text == "")
             {
-                MessageBox.Show("Please enter your username");
+                MessageBox.Show("Please enter your username.", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 txtuname.Focus();
                 return;
             }
             if (txtpass.Text == "")
             {
-                MessageBox.Show("Please enter your password");
+                MessageBox.Show("Please enter your password.", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 txtpass.Focus();
                 return;
             }            
@@ -48,14 +48,14 @@ namespace Sherwin_Motor_Parts
             OleDbDataReader reader = command.ExecuteReader(CommandBehavior.CloseConnection);
 
             if (reader.Read() == true)
-              {
+            {
                 sistema frm = new sistema();
                 this.Hide();
                 frm.Show();             
             }
             else
             {
-                MessageBox.Show("Invalid username and password");
+                MessageBox.Show("Invalid username and password.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtuname.Clear();
                 txtpass.Clear();
                 txtuname.Focus();

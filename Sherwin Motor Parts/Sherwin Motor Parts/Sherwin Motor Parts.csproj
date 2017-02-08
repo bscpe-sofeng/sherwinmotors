@@ -82,6 +82,18 @@
     <Compile Include="NewAccount.Designer.cs">
       <DependentUpon>NewAccount.cs</DependentUpon>
     </Compile>
+    <Compile Include="NewCustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewCustomer.Designer.cs">
+      <DependentUpon>NewCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewTransaction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewTransaction.Designer.cs">
+      <DependentUpon>NewTransaction.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="sistema.cs">
@@ -96,11 +108,29 @@
     <Compile Include="UAccount.Designer.cs">
       <DependentUpon>UAccount.cs</DependentUpon>
     </Compile>
+    <Compile Include="UCRecords.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UCRecords.Designer.cs">
+      <DependentUpon>UCRecords.cs</DependentUpon>
+    </Compile>
     <Compile Include="UpadateProduct.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UpadateProduct.Designer.cs">
       <DependentUpon>UpadateProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VCRecords.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VCRecords.Designer.cs">
+      <DependentUpon>VCRecords.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VCRecords1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VCRecords1.Designer.cs">
+      <DependentUpon>VCRecords1.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="AddProduct.resx">
       <DependentUpon>AddProduct.cs</DependentUpon>
@@ -120,6 +150,12 @@
     <EmbeddedResource Include="NewAccount.resx">
       <DependentUpon>NewAccount.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="NewCustomer.resx">
+      <DependentUpon>NewCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewTransaction.resx">
+      <DependentUpon>NewTransaction.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -135,8 +171,17 @@
     <EmbeddedResource Include="UAccount.resx">
       <DependentUpon>UAccount.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UCRecords.resx">
+      <DependentUpon>UCRecords.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UpadateProduct.resx">
       <DependentUpon>UpadateProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VCRecords.resx">
+      <DependentUpon>VCRecords.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VCRecords1.resx">
+      <DependentUpon>VCRecords1.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

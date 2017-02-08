@@ -13,12 +13,16 @@ namespace Sherwin_Motor_Parts
 {
     public partial class sistema : Form
     {
-        private OleDbConnection con = new OleDbConnection();
+        OleDbDataReader reader = null;
+        OleDbConnection con = null;
+        OleDbCommand com = null;
+        String constr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\Smp.accdb;";
+//        private OleDbConnection con = new OleDbConnection();
         
         public sistema()
         {
             InitializeComponent();
-            con.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\Smp.accdb;";
+//            con.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\Smp.accdb;";
         }
 
         private void sistema_Load(object sender, EventArgs e)
@@ -27,22 +31,33 @@ namespace Sherwin_Motor_Parts
         }
         public void disp_data()
         {
+            con = new OleDbConnection(constr);
             con.Open();
-            OleDbCommand com = new OleDbCommand();
-            com.Connection = con;
-            com.CommandType = CommandType.Text;
-            com.CommandText = "select * from Products";
-            com.ExecuteNonQuery();
-            DataTable dt = new DataTable();
-            OleDbDataAdapter da = new OleDbDataAdapter(com);
-            da.Fill(dt);
-            dataGridView1.DataSource = dt;
+            String sql = "SELECT * from Products";
+            com = new OleDbCommand(sql, con);
+            reader = com.ExecuteReader(CommandBehavior.CloseConnection);
+            dataGridView1.Rows.Clear();
+            while (reader.Read() == true)
+            {
+                dataGridView1.Rows.Add(reader[0], reader[1], reader[2], reader[3], reader[4], reader[5], reader[6]);
+            }
             con.Close();
+//            con.Open();
+//            OleDbCommand com = new OleDbCommand();
+//            com.Connection = con;
+//            com.CommandType = CommandType.Text;
+//            com.CommandText = "select * from Products";
+//            com.ExecuteNonQuery();
+//            DataTable dt = new DataTable();
+//            OleDbDataAdapter da = new OleDbDataAdapter(com);
+//            da.Fill(dt);
+//            dataGridView1.DataSource = dt;
+//            con.Close();
         }
       
         private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure you want to exit?", "Exit", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            if (MessageBox.Show("Are you sure you want to exit?", "Exit", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
             {
                 this.Hide();
                 Login frm = new Login();
@@ -123,6 +138,27 @@ namespace Sherwin_Motor_Parts
         private void timer1_Tick(object sender, EventArgs e)
         {
             label1.Text = System.DateTime.Now.ToString();
+        }
+
+        private void viewCustomerRecordsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            VCRecords VCRfrm = new VCRecords();
+            VCRfrm.Show();
+            VCRfrm.BringToFront();
+        }
+
+        private void newCustomerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NewCustomer NCfrm = new NewCustomer();
+            NCfrm.Show();
+            NCfrm.BringToFront();
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            NewTransaction NTfrm = new NewTransaction();
+            NTfrm.Show();
+            NTfrm.BringToFront();
         }                
       }
     }

@@ -70,39 +70,39 @@ namespace Sherwin_Motor_Parts
 
             if (txtProname.Text == "")
             {
-                MessageBox.Show("Please enter the product's name");
+                MessageBox.Show("Please enter the product's name.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 txtProname.Focus();
                 return;
             }
             if (txtSupplier.Text == "")
             {
-                MessageBox.Show("Please enter the supplier's name ");
+                MessageBox.Show("Please enter the supplier's name.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 txtSupplier.Focus();
                 return;
             }
             if (txtPDescription.Text == "")
             {
-                MessageBox.Show("Please enter the product description");
+                MessageBox.Show("Please enter the product description.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 txtPDescription.Focus();
                 return;
             }
             if (txtQuantity.Text == "")
             {
-                MessageBox.Show("Please enter the product quantity");
+                MessageBox.Show("Please enter the product quantity.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 txtQuantity.Focus();
                 return;
             }
             if (txtPrice.Text == "")
             {
-                MessageBox.Show("Please enter the product price");
+                MessageBox.Show("Please enter the product price.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 txtPrice.Focus();
                 return;
             }
 
             con = new OleDbConnection(constr);
             con.Open();
-            String sql = "insert into Products(Product_Name,Supplier_Name,Product_Description,Product_Quantity,Price,Total_Amount) values('" + txtProname.Text + "','" + txtSupplier.Text + "','" + txtPDescription.Text + "','" + txtQuantity.Text + "','" + txtPrice.Text + "','"+txtTAmount.Text+"')";
-            com = new OleDbCommand(sql, con);
+            String sc = "insert into Products(Product_Name,Supplier_Name,Product_Description,Product_Quantity,Price,Total_Amount) values('" + txtProname.Text + "','" + txtSupplier.Text + "','" + txtPDescription.Text + "','" + txtQuantity.Text + "','" + txtPrice.Text + "','"+txtTAmount.Text+"')";
+            com = new OleDbCommand(sc, con);
             reader = com.ExecuteReader(CommandBehavior.CloseConnection);
             dataGridView1.Rows.Clear();
             while (reader.Read() == true)
@@ -118,7 +118,15 @@ namespace Sherwin_Motor_Parts
 //            com.ExecuteNonQuery();
 //            con.Close();
             disp_data();
-            MessageBox.Show("Alright");                  
+            MessageBox.Show("Alright", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            txtProname.Clear();
+            txtSupplier.Clear();
+            txtPDescription.Clear();
+            txtQuantity.Clear();
+            txtPrice.Clear();
+            txtTAmount.Clear();
+            txtProname.Focus();
         }
 
         private void txtPDescription_TextChanged(object sender, EventArgs e)
@@ -131,13 +139,7 @@ namespace Sherwin_Motor_Parts
         private void txtQuantity_TextChanged(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(txtQuantity.Text) && !string.IsNullOrEmpty(txtPrice.Text))
-                txtTAmount.Text = (Convert.ToInt32(txtQuantity.Text) * Convert.ToInt32(txtPrice.Text)).ToString();
-
-            if (System.Text.RegularExpressions.Regex.IsMatch(txtQuantity.Text, "[^0-9]"))
-            {
-                MessageBox.Show("Please enter only numbers.");
-                txtQuantity.Clear();
-            }           
+                txtTAmount.Text = (Convert.ToDecimal(txtQuantity.Text) * Convert.ToDecimal(txtPrice.Text)).ToString();                      
         }
 
         private void txtQuantity_KeyPress(object sender, KeyPressEventArgs e)
@@ -152,25 +154,21 @@ namespace Sherwin_Motor_Parts
             }
         }
 
-        private void txtTPrice_TextChanged(object sender, EventArgs e)
+        private void txtPrice_TextChanged(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(txtQuantity.Text) && !string.IsNullOrEmpty(txtPrice.Text))
-                txtTAmount.Text = (Convert.ToInt32(txtQuantity.Text) * Convert.ToInt32(txtPrice.Text)).ToString();
-
-            if (System.Text.RegularExpressions.Regex.IsMatch(txtPrice.Text, "[^0-9]"))
-            {
-                MessageBox.Show("Please enter only numbers.");
-                txtPrice.Clear();
-            }           
+                txtTAmount.Text = (Convert.ToDecimal(txtQuantity.Text) * Convert.ToDecimal(txtPrice.Text)).ToString();                   
         }
 
-        private void txtTPrice_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtPrice_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (char.IsDigit(e.KeyChar) || char.IsControl(e.KeyChar))
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+       (e.KeyChar != '.'))
             {
-                e.Handled = false;
+                e.Handled = true;
             }
-            else
+
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
             {
                 e.Handled = true;
             }
@@ -184,12 +182,9 @@ namespace Sherwin_Motor_Parts
         private void AddProduct_FormClosing(object sender, FormClosingEventArgs e)
         {          
         }
-
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
         }
-
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -204,9 +199,7 @@ namespace Sherwin_Motor_Parts
         }
 
         private void txtTAmount_KeyPress(object sender, KeyPressEventArgs e)
-        {
-           
+        {           
         }
-
     }
 }

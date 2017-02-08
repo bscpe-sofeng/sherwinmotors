@@ -28,6 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnUAccountSave = new System.Windows.Forms.Button();
             this.txtESearchAccount = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -51,6 +57,13 @@
             this.btnUAccountCancel = new System.Windows.Forms.Button();
             this.btnEClear = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label9 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -60,7 +73,7 @@
             // btnUAccountSave
             // 
             this.btnUAccountSave.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUAccountSave.Location = new System.Drawing.Point(96, 13);
+            this.btnUAccountSave.Location = new System.Drawing.Point(143, 13);
             this.btnUAccountSave.Name = "btnUAccountSave";
             this.btnUAccountSave.Size = new System.Drawing.Size(115, 26);
             this.btnUAccountSave.TabIndex = 0;
@@ -73,7 +86,7 @@
             this.txtESearchAccount.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtESearchAccount.Location = new System.Drawing.Point(115, 14);
             this.txtESearchAccount.Name = "txtESearchAccount";
-            this.txtESearchAccount.Size = new System.Drawing.Size(249, 22);
+            this.txtESearchAccount.Size = new System.Drawing.Size(371, 22);
             this.txtESearchAccount.TabIndex = 1;
             // 
             // label1
@@ -102,18 +115,19 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Location = new System.Drawing.Point(5, -1);
+            this.groupBox1.Location = new System.Drawing.Point(4, 26);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(456, 215);
+            this.groupBox1.Size = new System.Drawing.Size(495, 215);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
             // txtUserID
             // 
             this.txtUserID.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUserID.Location = new System.Drawing.Point(76, 14);
+            this.txtUserID.Location = new System.Drawing.Point(76, 17);
             this.txtUserID.Name = "txtUserID";
-            this.txtUserID.Size = new System.Drawing.Size(101, 22);
+            this.txtUserID.ReadOnly = true;
+            this.txtUserID.Size = new System.Drawing.Size(94, 22);
             this.txtUserID.TabIndex = 1;
             this.txtUserID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtUserID_KeyPress);
             // 
@@ -121,7 +135,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(20, 16);
+            this.label8.Location = new System.Drawing.Point(20, 19);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(55, 16);
             this.label8.TabIndex = 0;
@@ -133,7 +147,7 @@
             this.txtretypepassword.Location = new System.Drawing.Point(130, 149);
             this.txtretypepassword.Name = "txtretypepassword";
             this.txtretypepassword.PasswordChar = '*';
-            this.txtretypepassword.Size = new System.Drawing.Size(317, 22);
+            this.txtretypepassword.Size = new System.Drawing.Size(357, 22);
             this.txtretypepassword.TabIndex = 6;
             // 
             // label6
@@ -151,7 +165,7 @@
             this.txtcontactno.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtcontactno.Location = new System.Drawing.Point(130, 185);
             this.txtcontactno.Name = "txtcontactno";
-            this.txtcontactno.Size = new System.Drawing.Size(317, 22);
+            this.txtcontactno.Size = new System.Drawing.Size(357, 22);
             this.txtcontactno.TabIndex = 7;
             this.txtcontactno.TextChanged += new System.EventHandler(this.txtcontactno_TextChanged);
             this.txtcontactno.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtcontactno_KeyPress);
@@ -162,7 +176,7 @@
             this.txtpassword.Location = new System.Drawing.Point(130, 123);
             this.txtpassword.Name = "txtpassword";
             this.txtpassword.PasswordChar = '*';
-            this.txtpassword.Size = new System.Drawing.Size(317, 22);
+            this.txtpassword.Size = new System.Drawing.Size(357, 22);
             this.txtpassword.TabIndex = 5;
             // 
             // txtusername
@@ -170,7 +184,7 @@
             this.txtusername.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtusername.Location = new System.Drawing.Point(76, 96);
             this.txtusername.Name = "txtusername";
-            this.txtusername.Size = new System.Drawing.Size(371, 22);
+            this.txtusername.Size = new System.Drawing.Size(411, 22);
             this.txtusername.TabIndex = 4;
             // 
             // txtlname
@@ -178,7 +192,7 @@
             this.txtlname.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtlname.Location = new System.Drawing.Point(76, 69);
             this.txtlname.Name = "txtlname";
-            this.txtlname.Size = new System.Drawing.Size(371, 22);
+            this.txtlname.Size = new System.Drawing.Size(411, 22);
             this.txtlname.TabIndex = 3;
             this.txtlname.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtlname_KeyPress);
             // 
@@ -187,7 +201,7 @@
             this.txtfname.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtfname.Location = new System.Drawing.Point(76, 43);
             this.txtfname.Name = "txtfname";
-            this.txtfname.Size = new System.Drawing.Size(371, 22);
+            this.txtfname.Size = new System.Drawing.Size(411, 22);
             this.txtfname.TabIndex = 2;
             this.txtfname.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtfname_KeyPress);
             // 
@@ -245,9 +259,9 @@
             // 
             this.groupBox2.Controls.Add(this.txtESearchAccount);
             this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Location = new System.Drawing.Point(5, 257);
+            this.groupBox2.Location = new System.Drawing.Point(5, 284);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(456, 43);
+            this.groupBox2.Size = new System.Drawing.Size(494, 43);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             // 
@@ -256,16 +270,16 @@
             this.groupBox3.Controls.Add(this.btnUAccountCancel);
             this.groupBox3.Controls.Add(this.btnEClear);
             this.groupBox3.Controls.Add(this.btnUAccountSave);
-            this.groupBox3.Location = new System.Drawing.Point(11, 214);
+            this.groupBox3.Location = new System.Drawing.Point(4, 241);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(446, 45);
+            this.groupBox3.Size = new System.Drawing.Size(495, 45);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             // 
             // btnUAccountCancel
             // 
             this.btnUAccountCancel.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUAccountCancel.Location = new System.Drawing.Point(342, 13);
+            this.btnUAccountCancel.Location = new System.Drawing.Point(389, 13);
             this.btnUAccountCancel.Name = "btnUAccountCancel";
             this.btnUAccountCancel.Size = new System.Drawing.Size(97, 26);
             this.btnUAccountCancel.TabIndex = 2;
@@ -276,7 +290,7 @@
             // btnEClear
             // 
             this.btnEClear.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEClear.Location = new System.Drawing.Point(227, 13);
+            this.btnEClear.Location = new System.Drawing.Point(275, 13);
             this.btnEClear.Name = "btnEClear";
             this.btnEClear.Size = new System.Drawing.Size(97, 26);
             this.btnEClear.TabIndex = 1;
@@ -287,17 +301,83 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(5, 305);
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2,
+            this.Column3,
+            this.Column4,
+            this.Column6,
+            this.Column5});
+            this.dataGridView1.Location = new System.Drawing.Point(4, 330);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(456, 169);
+            this.dataGridView1.Size = new System.Drawing.Size(495, 169);
             this.dataGridView1.TabIndex = 18;
+            this.dataGridView1.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_RowHeaderMouseClick);
+            // 
+            // Column1
+            // 
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Column1.DefaultCellStyle = dataGridViewCellStyle7;
+            this.Column1.HeaderText = "User ID";
+            this.Column1.Name = "Column1";
+            this.Column1.Width = 50;
+            // 
+            // Column2
+            // 
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Column2.DefaultCellStyle = dataGridViewCellStyle8;
+            this.Column2.HeaderText = "Firstname";
+            this.Column2.Name = "Column2";
+            // 
+            // Column3
+            // 
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Column3.DefaultCellStyle = dataGridViewCellStyle9;
+            this.Column3.HeaderText = "Lastname";
+            this.Column3.Name = "Column3";
+            // 
+            // Column4
+            // 
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Column4.DefaultCellStyle = dataGridViewCellStyle10;
+            this.Column4.HeaderText = "Username";
+            this.Column4.Name = "Column4";
+            // 
+            // Column6
+            // 
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Column6.DefaultCellStyle = dataGridViewCellStyle11;
+            this.Column6.HeaderText = "Password";
+            this.Column6.MinimumWidth = 2;
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
+            this.Column6.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column6.Width = 2;
+            // 
+            // Column5
+            // 
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Column5.DefaultCellStyle = dataGridViewCellStyle12;
+            this.Column5.HeaderText = "Contact Number";
+            this.Column5.Name = "Column5";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Arial", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(2, 9);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(435, 16);
+            this.label9.TabIndex = 19;
+            this.label9.Text = "Please select a row from the table below that you want to update/edit.";
             // 
             // UAccount
             // 
             this.AcceptButton = this.btnUAccountSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(465, 477);
+            this.ClientSize = new System.Drawing.Size(503, 502);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -316,6 +396,7 @@
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -344,5 +425,12 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TextBox txtUserID;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.Label label9;
     }
 }
